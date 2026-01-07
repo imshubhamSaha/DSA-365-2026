@@ -1,0 +1,16 @@
+class Solution:
+    def maxSubarrayXOR(self, arr, k):
+        n = len(arr)
+        left = 0
+        right = 0
+        xor_sum = 0
+        max_sum = 0
+        while right < n :
+            xor_sum ^= arr[right]
+            if (right - left) == (k - 1) :
+                max_sum = max(max_sum, xor_sum)
+                xor_sum ^= arr[left]
+                left += 1
+            right += 1
+            
+        return max_sum
