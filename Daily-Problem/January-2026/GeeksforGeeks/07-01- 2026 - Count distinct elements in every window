@@ -1,0 +1,21 @@
+class Solution:
+    def countDistinct(self, arr, k):
+        n = len(arr) 
+        left = 0
+        right = 0
+        unique = {}
+        distinct_count = []
+        while right < n :
+            unique[arr[right]] = unique.get(arr[right],0)  + 1
+            
+            if (right - left) == (k - 1) :
+                distinct_count.append(len(unique))
+                unique[arr[left]] -=  1
+                if unique[arr[left]] == 0 :
+                    unique.pop(arr[left])
+                left += 1
+            right += 1
+        
+        return distinct_count
+        
+        
