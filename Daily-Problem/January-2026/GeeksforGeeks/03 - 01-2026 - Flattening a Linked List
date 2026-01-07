@@ -1,0 +1,39 @@
+/**
+ * @param {Node} head
+ * @return {Node}
+ */
+
+class Solution {
+    flatten(root) {
+        let curr = root;
+        const arr = [];
+        
+        while (curr) {
+            let bottom = curr.bottom;
+            while (bottom){
+                arr.push(bottom.data);
+                bottom =bottom.bottom;
+            }
+            arr.push(curr.data);
+            curr = curr.next;
+        }
+        
+        
+        arr.sort((a,b) => a - b);
+        
+        let newHead=new Node();
+        let prev = newHead;
+        
+        let i = 0;
+        
+        while (i < arr.length) {
+            let newNode = new Node(arr[i]);
+            prev.bottom = newNode;
+            prev = newNode;
+            i += 1;
+        }
+        
+        return newHead.bottom;
+      
+    }
+}
