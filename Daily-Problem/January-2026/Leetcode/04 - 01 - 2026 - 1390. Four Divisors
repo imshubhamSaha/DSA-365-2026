@@ -1,0 +1,43 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var sumFourDivisors = function(nums) {
+    let sum = 0
+
+    for (let num of nums) {
+        if (isPrime(num)) continue
+        const root = Math.sqrt(num)
+        if (Number.isInteger(root)) continue
+
+        let divisorCount = 0
+        let firstDivisor = 0
+
+        for (let i = 2; i <= root; i++) {
+            if (divisorCount > 1) break
+
+            if (num % i === 0) {
+                divisorCount++
+                firstDivisor = i
+            }
+        }
+
+        if (divisorCount === 1) {
+            sum += 1 + num + firstDivisor + (num / firstDivisor)
+        }
+    }
+
+    return sum
+};
+function isPrime(n) {
+    if (n <= 1) return false
+    if (n <= 3) return true
+    if (n % 2 === 0 || n % 3 === 0) return false
+
+    let i = 5
+    while (i * i <= n) {
+        if (n % i === 0 || n % (i + 2) === 0) return false
+        i += 6
+    }
+    return true
+}
