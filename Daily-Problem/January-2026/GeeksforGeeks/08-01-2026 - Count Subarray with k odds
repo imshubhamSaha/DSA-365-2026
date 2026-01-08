@@ -1,0 +1,13 @@
+class Solution:
+    def countSubarrays(self, arr, k):
+        def calculate(n):
+            i , j, count, total = [0] * 4
+            while j < len(arr):
+                count += arr[j] % 2
+                while count > n:
+                    count -= 1 if arr[i] % 2 == 1 else 0
+                    i +=1
+                j +=1
+                total += (j - i)
+            return total
+        return calculate(k) - calculate(k - 1)
