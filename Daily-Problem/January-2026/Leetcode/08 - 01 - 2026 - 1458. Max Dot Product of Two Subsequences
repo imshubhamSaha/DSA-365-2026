@@ -1,0 +1,35 @@
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var maxDotProduct = function(nums1, nums2) {
+    const m = nums1.length;
+    const n = nums2.length;
+    const memo = new Map();
+
+    const dfs = function(i,j) {
+        if (i < 0 || j < 0)
+            return -Infinity;
+        
+        const k = `${i},${j}`;
+
+        if (memo.has(k))
+            return memo.get(k);
+        
+        const dot_product = nums1[i] * nums2[j];
+        let take = dot_product;
+
+        const prev_prod = dfs(i-1, j - 1);
+        if (prev_prod !== -Infinity)
+            take = Math.max(take, dot_product + prev_prod);
+
+        const skip = Math.max(dfs(i-1, j),dfs(i,j-1));
+
+        const result = Math.max(take, skip);
+        memo.set(k, result);
+        return result;
+    }
+
+    return dfs(m-1,n-1);
+};
