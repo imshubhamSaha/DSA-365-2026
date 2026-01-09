@@ -1,0 +1,21 @@
+class Solution:
+    def countAtMostK(self, arr, k):
+        # Code here
+        n = len(arr)
+        if k >= n :
+            return( n * (n+1)) // 2
+            
+        mpp = {}
+        total_valid_subarr = 0
+        left = 0
+        for right in range(n) :
+            mpp[arr[right]] = mpp.get(arr[right], 0) + 1
+            while len(mpp) > k :
+                mpp[arr[left]] = mpp[arr[left]] - 1
+                if mpp[arr[left]] == 0 :
+                    mpp.pop(arr[left])
+                left += 1
+            
+            total_valid_subarr += (right - left) + 1
+            
+        return total_valid_subarr
