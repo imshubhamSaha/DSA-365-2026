@@ -1,0 +1,27 @@
+/**
+ * @param {string} s1
+ * @param {string} s2
+ * @return {number}
+ */
+var minimumDeleteSum = function(s1, s2) {
+    const m = s1.length, n = s2.length;
+    const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (s1[i] === s2[j])
+                dp[i + 1][j + 1] = dp[i][j] + s1.charCodeAt(i);
+            else
+                dp[i + 1][j + 1] = Math.max(dp[i][j + 1], dp[i + 1][j]);
+        }
+    }
+
+    let result = 0;
+    for (const char of s1) {
+        result += char.charCodeAt(0);
+    }
+    for (const char of s2) 
+        result += char.charCodeAt(0);
+
+    return result - 2 * dp[m][n];
+};
