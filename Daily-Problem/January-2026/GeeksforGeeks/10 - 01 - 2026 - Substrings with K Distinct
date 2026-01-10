@@ -1,0 +1,29 @@
+class Solution:
+    def atMostK(self , s , k) :
+        n = len(s)
+        char_freq = [0] * 26
+        total_valid_substr = 0
+        distinct_char = 0
+        left = 0
+        right = 0
+        
+        while right < n :
+            idx = ord(s[right]) - ord('a')
+            if char_freq[idx] == 0 :
+                distinct_char += 1
+            char_freq[idx] += 1
+            
+            while distinct_char > k :
+                idx = ord(s[left]) - ord('a')
+                char_freq[idx] -= 1
+                if char_freq[idx] == 0 :
+                    distinct_char -= 1
+                left += 1
+            
+            total_valid_substr += (right - left) + 1
+            right += 1
+            
+        return total_valid_substr
+            
+    def countSubstr (self, s, k):
+        return self.atMostK(s, k) - self.atMostK(s,k-1)
