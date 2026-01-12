@@ -1,0 +1,32 @@
+/**
+ * @param {number[]} arr
+ * @param {number} k
+ * @return {number[]}
+ */
+class Solution {
+    maxOfSubarrays(arr, k) {
+        // code here
+        const n = arr.length;
+        const deque = [];
+        const res = [];
+        let left = 0;
+        let right = 0;
+        
+        while (right < n && left <= (n - k)) {
+            while (deque.length && arr[deque[deque.length - 1]] < arr[right]) {
+                deque.pop();
+            }
+            
+            deque.push(right);
+            if (((right - left) + 1) === k) {
+                res.push(arr[deque[0]]);
+                
+                if (left === deque[0]) 
+                    deque.shift();
+                left++;
+            }
+            right++;
+        }
+        return res;
+    }
+}
