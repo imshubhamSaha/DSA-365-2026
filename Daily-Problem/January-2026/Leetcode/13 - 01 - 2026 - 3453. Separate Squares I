@@ -1,0 +1,35 @@
+/**
+ * @param {number[][]} squares
+ * @return {number}
+ */
+var separateSquares = function(squares) {
+    let total = 0n;
+    const diff = new Map();
+
+    for (const sq of squares) {
+        const y = BigInt(sq[1]);
+        const s = BigInt(sq[2]);
+        total += s * s;
+        diff.set(y, (diff.get(y) ?? 0n) + s);
+        diff.set(y + s, (diff.get(y + s) ?? 0n) - s);
+    }
+
+    const curr = Array.from(diff.keys()).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+
+    let area = 0n;
+    let target = 0n;
+
+    for (let i = 0; i + 1 < curr.length; i++) {
+        const y = curr[i];
+        const y2 = curr[i + 1];
+
+        target += diff.get(y);
+        area += target * (y2 - y);
+
+        if (area * 2n >= total) {
+            return Number(y2) - Number(area * 2n - total) / Number(target * 2n);
+        }
+    }
+
+    return Number(curr[curr.length - 1]);
+};
