@@ -1,0 +1,26 @@
+class Solution:
+    def catchThieves(self, arr, k):
+        n = len(arr)
+        police = 0
+        theif = 0 
+        theif_arrested = 0 
+        while police < n and theif < n :
+            while police < n and  arr[police] != 'P':
+                police += 1
+                
+            while theif < n and  arr[theif] != 'T' :
+                theif += 1
+                
+            if police >= n or theif >= n :
+                break  
+             
+            if abs(police - theif) <= k :
+                theif_arrested += 1
+                arr[police] = 'C'
+                arr[theif] = 'C'
+            elif police < theif :
+                police += 1
+            else :
+                theif += 1
+                
+        return theif_arrested 
