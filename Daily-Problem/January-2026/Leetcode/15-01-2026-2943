@@ -1,0 +1,22 @@
+var maxLen = function(Bars) {
+    count = 2, length = 2;
+    for(i = 1; i < Bars.length; i++) {
+        if(Bars[i] - Bars[i-1] == 1) count++;
+        else count = 2;
+        length = Math.max(length, count);
+    }
+    return length;
+}
+/**
+ * @param {number} n
+ * @param {number} m
+ * @param {number[]} hBars
+ * @param {number[]} vBars
+ * @return {number}
+ */
+var maximizeSquareHoleArea = function(n, m, hBars, vBars) {
+    hBars.sort((a,b) => a - b);
+    vBars.sort((a,b) => a - b);
+    side = Math.min(maxLen(hBars), maxLen(vBars));
+    return side * side;
+};
