@@ -1,0 +1,14 @@
+class Solution:
+    def minCandy(self, arr):
+        n = len(arr)
+        candies_distributed = [1] * n
+        
+        for rating in range(1, n) :
+            if arr[rating] > arr[rating - 1] :
+                candies_distributed[rating] = candies_distributed[rating - 1] + 1
+        
+        for rating in range(n-2, -1, -1) :
+            if (arr[rating] > arr[rating + 1]) :
+                candies_distributed[rating] = max(candies_distributed[rating], candies_distributed[rating + 1] + 1)
+            
+        return sum(candies_distributed)
