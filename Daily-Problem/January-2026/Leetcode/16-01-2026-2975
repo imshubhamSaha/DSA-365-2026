@@ -1,0 +1,33 @@
+// 2975. Maximum Square Area by Removing Fences From a Field
+/**
+ * @param {number} m
+ * @param {number} n
+ * @param {number[]} hFences
+ * @param {number[]} vFences
+ * @return {number}
+ */
+var maximizeSquareArea = function(m, n, hFences, vFences) {
+     const mod = 1_000_000_007n;
+    hFences.push(1, m);
+    vFences.push(1, n);
+    hFences.sort((a, b) => a - b);
+    vFences.sort((a, b) => a - b);
+    const set = new Set();
+    for (let i = 0; i < hFences.length; i++){
+        for (let j = i + 1; j < hFences.length; j++){
+            set.add(hFences[j] - hFences[i]);
+        }
+    }
+    let maxArea = -1;
+    for (let i = 0; i < vFences.length; i++){
+        for (let j = i + 1; j < vFences.length; j++){
+            const d = vFences[j] - vFences[i];
+            if (set.has(d)){
+                maxArea = Math.max(maxArea, d);
+            }
+        }
+    }
+    if (maxArea === -1)
+        return -1;
+    return Number((BigInt(maxArea) * BigInt(maxArea)) % mod);
+};
