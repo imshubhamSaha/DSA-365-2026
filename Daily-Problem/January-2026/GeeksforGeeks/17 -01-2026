@@ -1,0 +1,20 @@
+# Expression contains redundant bracket or not
+
+class Solution():
+    def checkRedundancy(self, s):
+        stk = []
+        
+        for ch in s :
+            if ch == "(" :
+                stk.append(0)
+            elif ch == ")" :
+                if stk[-1] == 0 :
+                    return True
+                else :
+                    stk.pop()
+            elif ch == "+" or ch == "-" or ch == "*" or ch == "/" :
+                if stk :
+                    stk.pop()
+                    stk.append(1)
+        
+        return False
