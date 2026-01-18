@@ -1,0 +1,24 @@
+# Next element with greater frequency
+
+class Solution:
+    def nextFreqGreater(self, arr):
+        n = len(arr)
+        freq = {}
+        
+        for num in arr :
+            freq[num] = freq[num] + 1 if num in freq else 1
+        
+        stack = []
+        
+        modified =[-1] * n
+        
+        for l in range(n-1, -1, -1) : 
+            while stack and freq[stack[-1]] <= freq[arr[l]] :
+                stack.pop()
+                
+            if stack :
+                modified[l] = stack[-1]
+            stack.append(arr[l])
+            
+        return modified
+        
