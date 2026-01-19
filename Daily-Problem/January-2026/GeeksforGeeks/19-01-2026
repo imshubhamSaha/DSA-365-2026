@@ -1,0 +1,32 @@
+#Remove K Digits
+
+
+class Solution:
+    def removeKdig(self, s, k):
+        n = len(s)
+        if k >= n :
+            return "0"
+        
+        stk = []
+        
+        for num in s :
+            if not stk or (stk[-1] <= num) or k == 0 :
+                stk.append(num)
+            else :
+                while stk and (stk[-1] > num) and (k != 0) :
+                    stk.pop()
+                    k -= 1
+                stk.append(num)
+            
+            if len(stk) == 1 and stk[-1] == "0" :
+                stk.pop()
+            
+        
+        while stk and k != 0 :
+            stk.pop()
+            k -= 1
+        
+        if not stk :
+            return "0"
+        return "".join(stk)
+    
