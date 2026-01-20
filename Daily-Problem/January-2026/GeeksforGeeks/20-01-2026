@@ -1,0 +1,30 @@
+//Implement UNDO & REDO
+
+class Solution {
+  constructor(stk, redo_stk) {
+    this.stk = [];
+    this.redo_stk = [];
+  }
+  append(x) {
+    // append x into document
+    this.stk.push(x);
+    this.redo_stk = [];
+  }
+
+  undo() {
+    // undo last change
+    if (this.stk.length === 0) return;
+    this.redo_stk.push(this.stk.pop());
+  }
+
+  redo() {
+    // redo changes
+    if (this.redo_stk.length === 0) return;
+    this.stk.push(this.redo_stk.pop());
+  }
+
+  read() {
+    // read the document
+    return this.stk.join("");
+  }
+}
