@@ -1,0 +1,25 @@
+//Stock span problem
+
+/**
+ * @param {number[]} arr
+ * @returns {number[]}
+ */
+
+class Solution {
+  calculateSpan(arr) {
+    const n = arr.length;
+    const res = [1];
+    const stack = [0];
+
+    for (let i = 1; i < n; i++) {
+      while (stack.length && arr[stack[stack.length - 1]] <= arr[i])
+        stack.pop();
+
+      const span = !stack.length ? i + 1 : i - stack[stack.length - 1];
+      res.push(span);
+      stack.push(i);
+    }
+
+    return res;
+  }
+}
