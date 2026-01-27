@@ -1,0 +1,46 @@
+// Word Search
+
+
+/**
+ * @param {string[][]} mat
+ * @param {string} word
+ * @returns {boolean}
+ */
+
+class Solution {
+     dfs(i,j,ind,vis,mat,word){
+        if (ind === word.length) return true;
+    
+        const n = mat.length, m = mat[0].length;
+        vis[i][j] = true;
+    
+        const dr = [-1, 1, 0, 0];
+        const dc = [0, 0, -1, 1];
+    
+        for (let k = 0; k < 4; k++) {
+            const row = i + dr[k];
+            const col = j + dc[k];
+        
+            if (row >= 0 && row < n && col >= 0 && col < m && !vis[row][col] && mat[row][col] === word[ind]) {
+                if (this.dfs(row, col, ind + 1, vis, mat, word)) return true;
+            }
+        }
+    
+        vis[i][j] = false;
+        return false;
+    }
+    isWordExist(mat, word) {
+        const n = mat.length, m = mat[0].length;
+        const vis = Array.from({ length: n }, () => Array(m).fill(false));
+    
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < m; j++) {
+                if (mat[i][j] === word[0]) {
+                    if (this.dfs(i, j, 1, vis, mat, word)) return true;
+                }
+            }
+        }
+    
+        return false;
+    }
+}
