@@ -28,3 +28,22 @@ class Solution:
             result[i] = candidate        
 		            
 		return "".join(result)
+
+##################################################################################################################
+
+class Solution1:
+	def firstNonRepeating(self, s):
+	    n = len(s)
+		result = ["#"] * n
+		left = 0
+		right = 0
+		mpp = {}
+		while right < n :
+		    mpp[s[right]] = mpp.get(s[right], 0) + 1
+		    while left < right and mpp[s[left]] > 1 :
+		        left += 1
+		    if left <= right and mpp[s[left]] == 1 :
+		        result[right] = s[left]
+		    
+		    right += 1
+		return "".join(result)
