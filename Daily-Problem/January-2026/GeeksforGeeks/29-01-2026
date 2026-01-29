@@ -1,0 +1,30 @@
+# Stream First Non-repeating
+
+
+class Solution:
+	def firstNonRepeating(self, s):
+	    n = len(s)
+		result = ["#"] * n
+		freq = [0] * 26
+		mpp = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+		idx_pos = {}
+		for i in range(n) :
+		    char = s[i]
+		    if char not in idx_pos :
+		        idx_pos[char] = i
+		    idx = ord(char) - ord('a')
+		    freq[idx] += 1
+		    
+		    min_index = float('inf')
+            candidate = '#'
+
+            for j in range(26):
+                if freq[j] == 1:
+                    c = mpp[j]
+                    if idx_pos[c] < min_index:
+                        min_index = idx_pos[c]
+                        candidate = c
+
+            result[i] = candidate        
+		            
+		return "".join(result)
