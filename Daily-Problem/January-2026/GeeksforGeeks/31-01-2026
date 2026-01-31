@@ -1,0 +1,37 @@
+// Implement k Queues in a Single Array
+
+class kQueues {
+  constructor(n, k) {
+    this.q = Array.from({ length: k }, () => []);
+    this.k = k;
+    this.n = n;
+    this.size = 0;
+  }
+
+  isValidIdx(i) {
+    return i >= 0 && i < this.k;
+  }
+  enqueue(x, i) {
+    if (!this.isValidIdx(i) || this.isFull()) return;
+    this.q[i].push(x);
+    this.size += 1;
+  }
+
+  dequeue(i) {
+    if (!this.isValidIdx(i) || this.isEmpty(i)) return -1;
+
+    this.size -= 1;
+    return this.q[i].shift();
+  }
+
+  isEmpty(i) {
+    // Check if queue i is empty
+    if (!this.isValidIdx(i)) return true;
+    return this.q[i].length === 0;
+  }
+
+  isFull() {
+    // Check if array is fu
+    return this.size == this.n;
+  }
+}
