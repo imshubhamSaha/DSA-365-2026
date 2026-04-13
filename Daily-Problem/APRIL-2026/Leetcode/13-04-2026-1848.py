@@ -2,6 +2,7 @@
 
 
 class Solution:
+
     def getMinDistance(self, nums, target, start):
         left = 0
         right = len(nums) - 1
