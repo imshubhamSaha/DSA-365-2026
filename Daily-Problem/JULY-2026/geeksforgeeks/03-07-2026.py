@@ -1,5 +1,5 @@
 # Ways to Increase LCS by One
-
+ 
 class Solution:
     def waysToIncreaseLCSBy1(self, s1, s2):
         n1 = len(s1)
