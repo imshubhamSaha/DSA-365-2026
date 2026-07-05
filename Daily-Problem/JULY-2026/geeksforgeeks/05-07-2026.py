@@ -1,4 +1,5 @@
 # Max Gap Between Two Same
+
 class Solution:
 
     def maxCharGap(self, s: str) -> int:
