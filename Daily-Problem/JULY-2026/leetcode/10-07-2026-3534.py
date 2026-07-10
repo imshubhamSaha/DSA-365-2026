@@ -1,4 +1,5 @@
 # 3534. Path Existence Queries in a Graph II
+
 class Solution:
     def pathExistenceQueries(self, n: int, nums: List[int], maxDiff: int, queries: List[List[int]]) -> List[int]:
         new_nums = sorted(enumerate(nums), key=lambda x: x[1])
