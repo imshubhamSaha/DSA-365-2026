@@ -1,6 +1,7 @@
 # Unoccupied Computers
 
 class Solution:
+    
     def solve(self, n, s):
         m = len(s)
         if (m // 2) < n :
