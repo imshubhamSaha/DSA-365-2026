@@ -1,5 +1,6 @@
 # Min Steps by Knight
 from collections import deque
+
 class Solution:
 	def minStepToReachTarget(self, knightPos: list[int], targetPos: list[int], n: int) -> int:
 		#Code here
