@@ -1,5 +1,6 @@
 # Perimeter of Shapes in Binary Matrix
 class Solution:
+    
     def findPerimeter(self, mat: list[list[int]]) -> int:
         hth=len(mat)
         wth=len(mat[0])
