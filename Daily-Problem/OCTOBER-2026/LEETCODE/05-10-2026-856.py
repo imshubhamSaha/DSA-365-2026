@@ -1,4 +1,5 @@
 #856. Score of Parentheses
+
 class Solution:
     def scoreOfParentheses(self, s: str) -> int:
         n = len(s)
