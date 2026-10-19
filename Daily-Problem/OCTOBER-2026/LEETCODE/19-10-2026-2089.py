@@ -1,4 +1,5 @@
 # 2089. Find Target Indices After Sorting Array
+
 class Solution:
     def targetIndices(self, nums: list[int], target: int) -> list[int]:
         nums.sort()
